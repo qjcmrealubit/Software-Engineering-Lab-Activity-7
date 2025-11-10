@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connected Form Application</title>
+    
+    <style>
+        /* --- EMBEDDED STYLES.CSS FOR DESIGN CONSISTENCY --- */
+        
+        /* GENERAL STYLES */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff; /* White background */
+            padding: 30px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        /* Targets both H1 and H2 for consistency */
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+        
+        /* Navigation Links */
+        #nav-bar {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .nav-link {
+            cursor: pointer;
+            margin: 0 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* FORM GROUPS AND INPUTS */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600; /* Slightly bolder */
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        /* Style for all text-based inputs and select */
+        input:not([type="radio"]):not([type="checkbox"]), select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 6px; /* Rounded input corners */
+            box-sizing: border-box; 
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 1em;
+        }
+
+        /* UX: Focus State (Accessibility) */
+        input:focus:not([type="radio"]):not([type="checkbox"]), select:focus, textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+            outline: none;
+        }
+
+        /* RADIO AND CHECKBOX GROUP */
+        fieldset {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+        legend {
+            font-weight: bold;
+            color: #333;
+            padding: 0 10px;
+        }
+        .checkbox-group label {
+            display: inline; /* Keep label inline with checkbox */
+            font-weight: normal;
+        }
+
+        /* VALIDATION AND ERROR STYLES */
+        /* Error Message Appearance */
+        .error-message {
+            color: #dc3545; /* Bootstrap-like red */
+            font-size: 0.85em;
+            margin-top: 5px;
+            padding-left: 2px;
+            display: block;
+        }
+
+        /* Visual feedback for invalid inputs */
+        input:invalid:focus:not(:placeholder-shown) {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+        }
+
+        /* BUTTONS */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* Space between buttons */
+            margin-top: 30px;
+        }
+
+        .submit-btn, .reset-btn {
+            flex-grow: 1; /* Make buttons share space equally */
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn {
+            background-color: #007bff; /* Primary action blue */
+            color: white;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .reset-btn {
+            background-color: #6c757d; /* Secondary gray */
+            color: white;
+        }
+        .reset-btn:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <div id="nav-bar">
+        <span class="nav-link" onclick="showView('registrationView')">Register</span> |
+        <span class="nav-link" onclick="showView('loginView')">Login</span> |
+        <span class="nav-link" onclick="showView('checkoutView')">Checkout</span> |
+        <span class="nav-link" onclick="showView('profileView')">Profile</span>
+    </div>
+
+    <!-- 1. MAJOR FORM: USER REGISTRATION -->
+    <div id="registrationView">
+        <h1>Create Your Account</h1>
+        <form id="registrationForm" action="/api/register" method="POST">
+            <!-- 1. Textbox (Full Name) -->
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                <span class="error-message" id="fullName-error"></span>
+            </div>
+
+            <!-- 2. Email -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="user@example.com" required>
+                <span class="error-message" id="email-error"></span>
+            </div>
+
+            <!-- 3. Password -->
+            <div class="form-group">
+                <label for="password">Password (Min 8 chars)</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required minlength="8">
+                <span class="error-message" id="password-error"></span>
+            </div>
+            
+            <!-- 4. Password (Confirm) -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required>
+                <span class="error-message" id="confirmPassword-error"></span>
+            </div>
+
+            <!-- 5. Date (Birth Date) -->
+            <div class="form-group">
+                <label for="birthDate">Date of Birth</label>
+                <input type="date" id="birthDate" name="birthDate" required max="2007-01-01">
+                <span class="error-message" id="birthDate-error"></span>
+            </div>
+            
+            <!-- 6. Dropdown (Security Question) -->
+            <div class="form-group">
+                <label for="secQuestion">Security Question</label>
+                <select id="secQuestion" name="secQuestion" required>
+                    <option value="" disabled selected>Select a question...</option>
+                    <option value="pet">What was your first pet's name?</option>
+                    <option value="city">What city were you born in?</option>
+                </select>
+                <span class="error-message" id="secQuestion-error"></span>
+            </div>
+
+            <!-- 7. Radio Buttons (Role) -->
+            <fieldset class="form-group">
+                <legend>Account Role</legend>
+                <input type="radio" id="customer" name="role" value="customer" checked>
+                <label for="customer">Customer</label>
+                <input type="radio" id="vendor" name="role" value="vendor">
+                <label for="vendor">Vendor</label>
+            </fieldset>
+
+            <!-- 8. Checkbox (Newsletter) -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="newsletter" name="newsletter">
+                <label for="newsletter">Subscribe to our newsletter</label>
+            </div>
+            
+            <!-- 9. Hidden Field -->
+            <input type="hidden" name="source" value="web_signup">
+            
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Register</button>
+                <button type="reset" class="reset-btn">Clear Form</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 2. SUPPORTING FORM: LOGIN PAGE -->
+    <div id="loginView" style="display:none;">
+        <h2>Sign In to Your Account</h2>
+        <form id="loginForm" action="/api/login" method="POST">
+            <!-- 1. Email -->
+            <div class="form-group">
+                <label for="loginEmail">Email Address</label>
+                <input type="email" id="loginEmail" name="loginEmail" placeholder="user@example.com" required>
+                <span class="error-message" id="loginEmail-error"></span>
+            </div>
+
+            <!-- 2. Password -->
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="loginPassword" placeholder="••••••••" required>
+                <span class="error-message" id="loginPassword-error"></span>
+            </div>
+
+            <!-- 3. Checkbox (Remember Me) -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="rememberMe" name="rememberMe">
+                <label for="rememberMe">Remember Me</label>
+            </div>
+
+            <!-- 4. Submit Button -->
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Log In</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 3. MAJOR FORM: PRODUCT CHECKOUT -->
+    <div id="checkoutView" style="display:none;">
+        <h2>Complete Your Order</h2>
+        <form id="checkoutForm" action="/api/checkout" method="POST">
+            
+            <!-- Section 1: Shipping (Controls 1, 2, 3, 4) -->
+            <fieldset>
+                <legend>Shipping & Address</legend>
+                <!-- 1. Textbox (Shipping Name) -->
+                <div class="form-group">
+                    <label for="shipName">Recipient Full Name</label>
+                    <input type="text" id="shipName" name="shipName" required>
+                    <span class="error-message" id="shipName-error"></span>
+                </div>
+                <!-- 2. Textarea (Shipping Address) -->
+                <div class="form-group">
+                    <label for="shipAddress">Street Address</label>
+                    <textarea id="shipAddress" name="shipAddress" rows="3" placeholder="Apartment, building, street" required></textarea>
+                    <span class="error-message" id="shipAddress-error"></span>
+                </div>
+                <!-- 3. Number (Zip Code) -->
+                <div class="form-group">
+                    <label for="zipCode">Zip Code</label>
+                    <input type="number" id="zipCode" name="zipCode" placeholder="e.g., 90210" required min="100" max="99999">
+                    <span class="error-message" id="zipCode-error"></span>
+                </div>
+                <!-- 4. Textarea (Order Notes) -->
+                <div class="form-group">
+                    <label for="orderNotes">Delivery Instructions (Optional)</label>
+                    <textarea id="orderNotes" name="orderNotes" rows="2"></textarea>
+                </div>
+            </fieldset>
+
+            <!-- Section 2: Payment (Controls 5, 6, 7) -->
+            <fieldset>
+                <legend>Payment Information</legend>
+                <!-- 5. Number (Card Number) -->
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" name="cardNumber" pattern="\d{16}" placeholder="16 digits" required maxlength="16">
+                    <span class="error-message" id="cardNumber-error"></span>
+                </div>
+                <!-- 6. Date (Expiry Date) -->
+                <div class="form-group">
+                    <label for="expiryDate">Expiry Date (MM/YY)</label>
+                    <input type="text" id="expiryDate" name="expiryDate" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" placeholder="MM/YY" required maxlength="5">
+                    <span class="error-message" id="expiryDate-error"></span>
+                </div>
+                <!-- 7. Password/Number (CVV) -->
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" name="cvv" placeholder="3 or 4 digits" required minlength="3" maxlength="4">
+                    <span class="error-message" id="cvv-error"></span>
+                </div>
+            </fieldset>
+            
+            <!-- Section 3: Options (Controls 8, 9) -->
+            <!-- 8. Radio Buttons (Shipping Speed) -->
+            <fieldset class="form-group">
+                <legend>Shipping Speed</legend>
+                <input type="radio" id="standard" name="shippingSpeed" value="standard" checked>
+                <label for="standard">Standard (5-7 days)</label>
+                <input type="radio" id="express" name="shippingSpeed" value="express">
+                <label for="express">Express (1-2 days)</label>
+            </fieldset>
+            
+            <!-- 9. Checkbox (Gift Wrap) -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="giftWrap" name="giftWrap">
+                <label for="giftWrap">Add gift wrapping ($5.00)</label>
+            </div>
+            
+            <!-- 10. Hidden Field -->
+            <input type="hidden" name="orderTotal" value="150.99">
+            
+            <!-- Button -->
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Place Order</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 4. SUPPORTING FORM: PROFILE UPDATE -->
+    <div id="profileView" style="display:none;">
+        <h2>Update Profile Settings</h2>
+        <form id="profileForm" action="/api/update-profile" method="POST">
+            <!-- 1. Textbox (Full Name) -->
+            <div class="form-group">
+                <label for="profileName">Full Name</label>
+                <input type="text" id="profileName" name="profileName" placeholder="John Doe" required>
+                <span class="error-message" id="profileName-error"></span>
+            </div>
+            
+            <!-- 2. Email (New Email) -->
+            <div class="form-group">
+                <label for="newEmail">New Email</label>
+                <input type="email" id="newEmail" name="newEmail" placeholder="new.email@example.com">
+                <span class="error-message" id="newEmail-error"></span>
+            </div>
+
+            <!-- 3. Dropdown (Timezone) -->
+            <div class="form-group">
+                <label for="timezone">Timezone</label>
+                <select id="timezone" name="timezone" required>
+                    <option value="" disabled selected>Select Timezone</option>
+                    <option value="PST">Pacific (PST/PDT)</option>
+                    <option value="EST">Eastern (EST/EDT)</option>
+                    <option value="GMT">Greenwich (GMT)</option>
+                </select>
+                <span class="error-message" id="timezone-error"></span>
+            </div>
+
+            <!-- 4. Textarea (Bio) -->
+            <div class="form-group">
+                <label for="profileBio">Bio/About Me</label>
+                <textarea id="profileBio" name="profileBio" rows="3" maxlength="250" placeholder="A brief description (Max 250 characters)"></textarea>
+                <span class="error-message" id="profileBio-error"></span>
+            </div>
+            
+            <!-- 5. File Upload (Avatar) -->
+            <div class="form-group">
+                <label for="avatar">Profile Picture (Max 1MB)</label>
+                <input type="file" id="avatar" name="avatar" accept="image/*">
+                <span class="error-message" id="avatar-error"></span>
+            </div>
+
+            <!-- 6. Password (New Password) -->
+            <div class="form-group">
+                <label for="profilePassword">New Password</label>
+                <input type="password" id="profilePassword" name="profilePassword" placeholder="••••••••">
+                <span class="error-message" id="profilePassword-error"></span>
+            </div>
+            
+            <!-- 7. Password (Confirm Password) -->
+            <div class="form-group">
+                <label for="confirmProfilePassword">Confirm Password</label>
+                <input type="password" id="confirmProfilePassword" name="confirmProfilePassword" placeholder="••••••••">
+                <span class="error-message" id="confirmProfilePassword-error"></span>
+            </div>
+
+            <!-- 8. Checkbox (SMS Alerts) -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="smsAlerts" name="smsAlerts" checked>
+                <label for="smsAlerts">Receive SMS Alerts</label>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Save Changes</button>
+            </div>
+        </form>
+    </div>
+
+</main>
+
+<script>
+    // --- EMBEDDED VALIDATION.JS LOGIC ---
+    
+    // View switching function to connect the 4 forms
+    function showView(viewId) {
+        document.getElementById('registrationView').style.display = 'none';
+        document.getElementById('loginView').style.display = 'none';
+        document.getElementById('checkoutView').style.display = 'none';
+        document.getElementById('profileView').style.display = 'none';
+        document.getElementById(viewId).style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showView('registrationView'); // Start on the registration page
+
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const expiryPattern = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
+
+        const clearErrors = (form) => {
+            form.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+        };
+        
+        // Helper function to handle form submission simulation
+        const handleSuccess = (form, message, nextViewId) => {
+             form.innerHTML = `<h2>Success!</h2><p>${message}</p>
+                <div class="button-group"><button onclick="showView('${nextViewId}')" class="submit-btn">Continue</button></div>`;
+        };
+
+
+        // --- 1. MAJOR FORM: USER REGISTRATION (index.html) ---
+        const registrationForm = document.getElementById('registrationForm');
+        if (registrationForm) {
+            registrationForm.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                clearErrors(this);
+                let isValid = true;
+                
+                const fullName = document.getElementById('fullName');
+                if (fullName.value.trim().length < 2) {
+                    document.getElementById('fullName-error').textContent = 'Full name is required (min 2 chars).';
+                    isValid = false;
+                }
+
+                const email = document.getElementById('email');
+                if (!emailPattern.test(email.value)) {
+                    document.getElementById('email-error').textContent = 'Please enter a valid email format.';
+                    isValid = false;
+                }
+
+                const password = document.getElementById('password');
+                if (password.value.length < 8) {
+                    document.getElementById('password-error').textContent = 'Password must be at least 8 characters.';
+                    isValid = false;
+                }
+
+                const confirmPassword = document.getElementById('confirmPassword');
+                if (confirmPassword.value !== password.value) {
+                    document.getElementById('confirmPassword-error').textContent = 'Passwords do not match.';
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    handleSuccess(registrationForm, 'Account created successfully! Please log in.', 'loginView');
+                }
+            });
+        }
+
+        // --- 2. SUPPORTING FORM: LOGIN PAGE (login.html) ---
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                clearErrors(this);
+                let isValid = true;
+
+                const email = document.getElementById('loginEmail');
+                if (!emailPattern.test(email.value)) {
+                    document.getElementById('loginEmail-error').textContent = 'Valid email is required.';
+                    isValid = false;
+                }
+
+                const password = document.getElementById('loginPassword');
+                if (password.value.length === 0) {
+                    document.getElementById('loginPassword-error').textContent = 'Password is required.';
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    handleSuccess(loginForm, 'Access Granted. Proceed to profile update or checkout.', 'profileView');
+                }
+            });
+        }
+
+        // --- 3. MAJOR FORM: PRODUCT CHECKOUT (checkout.html) ---
+        const checkoutForm = document.getElementById('checkoutForm');
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                clearErrors(this);
+                let isValid = true;
+
+                const shipName = document.getElementById('shipName');
+                if (shipName.value.trim() === '') {
+                    document.getElementById('shipName-error').textContent = 'Shipping name is required.';
+                    isValid = false;
+                }
+                
+                const zipCode = document.getElementById('zipCode');
+                if (zipCode.value.length < 5 || zipCode.value.length > 6) {
+                    document.getElementById('zipCode-error').textContent = 'Zip code must be 5 or 6 digits.';
+                    isValid = false;
+                }
+
+                const cardNumber = document.getElementById('cardNumber');
+                if (cardNumber.value.length !== 16 || isNaN(cardNumber.value)) {
+                    document.getElementById('cardNumber-error').textContent = 'Card number must be 16 digits.';
+                    isValid = false;
+                }
+
+                const cvv = document.getElementById('cvv');
+                if (cvv.value.length < 3 || cvv.value.length > 4 || isNaN(cvv.value)) {
+                    document.getElementById('cvv-error').textContent = 'CVV must be 3 or 4 digits.';
+                    isValid = false;
+                }
+
+                const expiryDate = document.getElementById('expiryDate');
+                if (!expiryPattern.test(expiryDate.value)) {
+                    document.getElementById('expiryDate-error').textContent = 'Invalid Expiry Date (Use MM/YY format).';
+                    isValid = false;
+                }
+                
+                this.querySelectorAll('[required]:not([type="radio"])').forEach(input => {
+                    if (input.value.trim() === '') {
+                        const errorId = input.id + '-error';
+                        if (!document.getElementById(errorId).textContent) {
+                           document.getElementById(errorId).textContent = 'This field is required.';
+                        }
+                        isValid = false;
+                    }
+                });
+
+                if (isValid) {
+                    handleSuccess(checkoutForm, 'Order Confirmed! Thank you for your purchase.', 'profileView');
+                }
+            });
+        }
+        
+        // --- 4. SUPPORTING FORM: PROFILE UPDATE (profile.html) ---
+        const profileForm = document.getElementById('profileForm');
+        if (profileForm) {
+            profileForm.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                clearErrors(this);
+                let isValid = true;
+                
+                const newEmail = document.getElementById('newEmail');
+                if (newEmail.value.trim() !== '' && !emailPattern.test(newEmail.value)) {
+                    document.getElementById('newEmail-error').textContent = 'Please enter a valid email format.';
+                    isValid = false;
+                }
+
+                const profilePassword = document.getElementById('profilePassword');
+                const confirmProfilePassword = document.getElementById('confirmProfilePassword');
+                
+                if (profilePassword.value.trim() !== '' && profilePassword.value.length < 8) {
+                    document.getElementById('profilePassword-error').textContent = 'New password must be at least 8 characters.';
+                    isValid = false;
+                }
+                
+                if (profilePassword.value.trim() !== '' && profilePassword.value !== confirmProfilePassword.value) {
+                    document.getElementById('confirmProfilePassword-error').textContent = 'Passwords do not match.';
+                    isValid = false;
+                }
+
+                const profileBio = document.getElementById('profileBio');
+                if (profileBio.value.length > 250) {
+                    document.getElementById('profileBio-error').textContent = 'Bio cannot exceed 250 characters.';
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    handleSuccess(profileForm, 'Profile changes have been saved.', 'checkoutView');
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
