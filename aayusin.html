@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martiliu Packo Product Management System</title>
 
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<!---------------------- LOGIN SCREEN --------------------->
-<div id="loginScreen" class="login-wrapper">
+<!-- ==================== LOGIN SCREEN ==================== --><div id="loginScreen" class="login-wrapper">
     <div class="login-container">
         <div class="header-bar">Martiliu Packo Product Management System</div>
         <div class="login-body">
@@ -37,44 +36,70 @@
     </div>
 </div>
 
-<!---------------------- DASHBOARD --------------------->
-<div id="dashboardScreen" class="dashboard-wrapper">
+<!-- ==================== DASHBOARD WRAPPER ==================== --><div id="dashboardScreen" class="dashboard-wrapper">
     <div class="dashboard">
-        <!-- Top Bar -->
-        <div class="top-bar">
-            <div>Martiliu Packo Hardware Management System</div>
-            <div>Welcome, <strong>Admin</strong> <a href="#" class="logout" id="logoutBtn">Logout</a></div>
-        </div>
 
-        <div class="main-content">
-            <!-- Sidebar -->
-            <nav class="sidebar">
-                <ul>
-                    <li class="active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
-                    <li class="disabled"><i class="fas fa-box"></i> Product Management</li>
-                    <li class="disabled"><i class="fas fa-warehouse"></i> Inventory</li>
-                    <li data-page="billing"><i class="fas fa-file-invoice-dollar"></i> Billing</li>
-                    <li class="disabled"><i class="fas fa-chart-bar"></i> Reports</li>
-                    <li data-page="account"><i class="fas fa-user-cog"></i> Account Management</li>
-                    <li class="disabled"><i class="fas fa-tools"></i> Maintenance</li>
-                    <li class="disabled"><i class="fas fa-question-circle"></i> Help</li>
-                </ul>
-            </nav>
+        <!-- Sidebar --><nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Martiliu Packo</h2>
+            </div>
+            <ul>
+                <li class="active" data-page="dashboard"> Dashboard</li>
+                <li class="disabled"> Product Management</li>
+                <li class="disabled"> Inventory</li>
+                <li data-page="billing"> Billing</li>
+                <li class="disabled"> Reports</li>
+                <li data-page="account"> Account Management</li>
+                <li class="disabled"> Maintenance</li>
+                <li class="disabled"> Help</li>
+            </ul>
+        </nav>
 
-            <!-- Content Area -->
-            <section class="content" id="contentArea">
+        <div class="main-content-wrapper">
+            <!-- Top Bar --><div class="top-bar">
+                <div class="top-bar-title" id="pageTitle">Dashboard Overview</div>
+                <a href="#" class="logout" id="logoutBtn">
+                    <span>Welcome, <strong>Admin</strong></span>
+                    <span>Logout</span>
+                </a>
+            </div>
 
-                <!-- Dashboard Page -->
-                <div id="dashboardPage">
-                    <h2 class="page-title">Dashboard Overview</h2>
+            <!-- Content Area --><section class="content" id="contentArea">
+
+                <!-- ==================== Dashboard Page ==================== --><div id="dashboardPage">
                     <div class="stats">
-                        <div class="stat-card"><i class="fas fa-cube icon"></i><h3>Total Products</h3><div class="value">1,247</div></div>
-                        <div class="stat-card low-stock"><i class="fas fa-exclamation-triangle icon"></i><h3>Low Stock Items</h3><div class="value">23</div></div>
-                        <div class="stat-card sales"><i class="fas fa-dollar-sign icon"></i><h3>Sales Today</h3><div class="value">₱45,890</div></div>
-                        <div class="stat-card growth"><i class="fas fa-chart-line icon"></i><h3>Revenue Growth</h3><div class="value">+12.5%</div></div>
+                        <div class="stat-card products">
+                            <div class="icon-container"></div>
+                            <div class="info">
+                                <h3>Total Products</h3>
+                                <div class="value">1,247</div>
+                            </div>
+                        </div>
+                         <div class="stat-card low-stock">
+                            <div class="icon-container"></div>
+                            <div class="info">
+                                <h3>Low Stock Items</h3>
+                                <div class="value">23</div>
+                            </div>
+                        </div>
+                         <div class="stat-card sales">
+                            <div class="icon-container"></div>
+                            <div class="info">
+                                <h3>Sales Today</h3>
+                                <div class="value">₱45,890</div>
+                            </div>
+                        </div>
+                         <div class="stat-card growth">
+                            <div class="icon-container"></div>
+                            <div class="info">
+                                <h3>Revenue Growth</h3>
+                                <div class="value">+12.5%</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="bottom-row">
-                        <div class="activities"><div class="section-title">Recent Activities</div>
+                        <div class="activities">
+                            <div class="section-title">Recent Activities</div>
                             <ul>
                                 <li>New product added: Cement 50kg</li>
                                 <li>Stock updated: Steel Bars</li>
@@ -82,7 +107,8 @@
                                 <li>User account created: john.doe</li>
                             </ul>
                         </div>
-                        <div class="quick-actions"><div class="section-title">Quick Actions</div>
+                        <div class="quick-actions">
+                            <div class="section-title">Quick Actions</div>
                             <button>Add New Product</button>
                             <button class="secondary">Generate Report</button>
                             <button class="secondary">View Low Stock Items</button>
@@ -90,73 +116,80 @@
                     </div>
                 </div>
 
-                <!-- Billing Page -->
-                <div id="billingPage" style="display:none;">
-                    <h2 class="page-title">Billing & Sales</h2>
+                <!-- ==================== Billing Page ==================== --><div id="billingPage" style="display:none;">
                     <div class="billing-container">
                         <div class="product-list">
-                            <div class="section-title"><i class="fas fa-list"></i> Product List</div>
+                            <div class="section-title"> Product List</div>
                             <input type="text" class="search-input" placeholder="Search products..." id="productSearch">
                             <div id="productItems"></div>
                         </div>
 
                         <div class="cart-section">
-                            <div class="section-title"><i class="fas fa-shopping-cart"></i> Shopping Cart</div>
+                            <div class="section-title"> Shopping Cart</div>
                             <div id="cartItems"></div>
-                            <div class="cart-total-row"><span>Subtotal</span><span class="currency" id="subtotal">₱0.00</span></div>
-                            <div class="cart-total-row"><span>Discount</span><span class="currency" id="discount">₱0.00</span></div>
-                            <div class="cart-total-row"><span>Tax (6%)</span><span class="currency" id="tax">₱0.00</span></div>
-                            <div class="cart-total-row" style="font-size:1.1rem;border-top:2px solid #3b82f6;">
-                                <span>Total</span><span class="currency" id="total">₱0.00</span>
+                            <div class="cart-total-row">
+                                <span>Subtotal</span>
+                                <span id="subtotal">₱0.00</span>
+                            </div>
+                            <div class="cart-total-row">
+                                <span>Discount</span>
+                                <span id="discount">₱0.00</span>
+                            </div>
+                            <div class="cart-total-row">
+                                <span>Tax (6%)</span>
+                                <span id="tax">₱0.00</span>
+                            </div>
+                            <div class="cart-total-row total">
+                                <span>Total</span>
+                                <span id="total">₱0.00</span>
                             </div>
                             <div class="cart-footer">
-                                <button class="clear-cart-btn" id="clearCart">Clear Cart</button>
                                 <button class="process-payment-btn" id="processPayment">Process Payment</button>
+                                <button class="clear-cart-btn" id="clearCart">Clear Cart</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Account Management Page -->
-                <div id="accountPage" style="display:none;">
-                    <h2 class="page-title">Account Management</h2>
-
+                <!-- ==================== Account Management Page ==================== --><div id="accountPage" style="display:none;">
                     <div class="account-actions">
-                        <button class="action-btn" id="addAccountBtn">Add Account</button>
-                        <button class="action-btn edit" id="editAccountBtn">Edit Account</button>
-                        <button class="action-btn reset" id="resetPasswordBtn">Reset Password</button>
-                        <button class="action-btn deactivate" id="deactivateBtn">Deactivate Account</button>
+                        <button class="action-btn" id="addAccountBtn"> Add Account</button>
+                        <button class="action-btn edit" id="editAccountBtn"> Edit Account</button>
+                        <button class="action-btn reset" id="resetPasswordBtn"> Reset Password</button>
+                        <button class="action-btn deactivate" id="deactivateBtn"> Deactivate Account</button>
                     </div>
 
-                    <table class="account-table">
-                        <thead>
-                            <tr>
-                                <th>Username</th><th>Role</th><th>Status</th><th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="userTableBody">
-                            <tr>
-                                <td>admin</td><td>Admin</td>
-                                <td><span class="status-badge status-active">Active</span></td>
-                                <td><button class="manage-btn" onclick="openProfileModal('admin')">Manage</button></td>
-                            </tr>
-                            <tr>
-                                <td>john.doe</td><td>Staff</td>
-                                <td><span class="status-badge status-active">Active</span></td>
-                                <td><button class="manage-btn" onclick="openProfileModal('john.doe')">Manage</button></td>
-                            </tr>
-                            <tr>
-                                <td>jane.smith</td><td>Staff</td>
-                                <td><span class="status-badge status-active">Active</span></td>
-                                <td><button class="manage-btn" onclick="openProfileModal('jane.smith')">Manage</button></td>
-                            </tr>
-                            <tr>
-                                <td>mike.jones</td><td>Staff</td>
-                                <td><span class="status-badge status-inactive">Inactive</span></td>
-                                <td><button class="manage-btn" onclick="openProfileModal('mike.jones')">Manage</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="account-table-container">
+                        <table class="account-table">
+                            <thead>
+                                <tr>
+                                    <th>Username</th><th>Role</th><th>Status</th><th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                                <tr>
+                                    <td>admin</td><td>Admin</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                    <td><button class="manage-btn" onclick="openProfileModal('admin')">Manage</button></td>
+                                </tr>
+                                <tr>
+                                    <td>john.doe</td><td>Staff</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                    <td><button class="manage-btn" onclick="openProfileModal('john.doe')">Manage</button></td>
+                                </tr>
+                                <tr>
+                                    <td>jane.smith</td><td>Staff</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                    <td><button class="manage-btn" onclick="openProfileModal('jane.smith')">Manage</button></td>
+                                </tr>
+                                <tr>
+                                    <td>mike.jones</td><td>Staff</td>
+                                    <td><span class="status-badge status-inactive">Inactive</span></td>
+                                    <td><button class="manage-btn" onclick="openProfileModal('mike.jones')">Manage</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </section>
@@ -164,13 +197,9 @@
     </div>
 </div>
 
-<!---------------------- MODALS (Registration & Profile) --------------------->
-<!-- Registration Modal -->
-<div id="registrationModal" class="modal">
+<!-- ==================== MODALS (Unchanged) ==================== --><div id="registrationModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">User Registration</div>
-        
-        <!-- Step Progress Bar -->
         <div class="modal-progress">
             <div class="progress-step active" data-step="1">
                 <div class="step-icon">1</div>
@@ -181,10 +210,8 @@
                 <div class="step-label">Details</div>
             </div>
         </div>
-
         <div class="modal-body">
             <form id="registrationForm">
-                <!-- Step 1: Credentials -->
                 <div class="form-step active" data-step="1">
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
@@ -197,10 +224,10 @@
                         <span class="error-message" id="email-error"></span>
                     </div>
                     <div class="form-group password-group">
-                        <label for="password">Password (Min 8 chars)</label>
-                        <input type="password" id="password" name="password" placeholder="••••••••" required minlength="8">
+                        <label for="regPassword">Password (Min 8 chars)</label>
+                        <input type="password" id="regPassword" name="password" placeholder="••••••••" required minlength="8">
                         <i class="fas fa-eye-slash toggle-password"></i>
-                        <span class="error-message" id="password-error"></span>
+                        <span class="error-message" id="regPassword-error"></span>
                     </div>
                     <div class="form-group password-group">
                         <label for="confirmPassword">Confirm Password</label>
@@ -209,8 +236,6 @@
                         <span class="error-message" id="confirmPassword-error"></span>
                     </div>
                 </div>
-
-                <!-- Step 2: Personal Details -->
                 <div class="form-step" data-step="2">
                     <div class="form-group">
                         <label for="birthDate">Date of Birth</label>
@@ -252,12 +277,9 @@
     </div>
 </div>
 
-<!-- Profile Update Modal -->
 <div id="profileModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">Profile Update – <span id="profileUser"></span></div>
-
-        <!-- Step Progress Bar -->
         <div class="modal-progress">
             <div class="progress-step active" data-step="1">
                 <div class="step-icon">1</div>
@@ -268,10 +290,8 @@
                 <div class="step-label">Security & Settings</div>
             </div>
         </div>
-
         <div class="modal-body">
             <form id="profileForm">
-                <!-- Step 1: Profile Details -->
                 <div class="form-step active" data-step="1">
                     <div class="form-group">
                         <label for="profileName">Full Name</label>
@@ -289,8 +309,6 @@
                         <span class="error-message" id="profileBio-error"></span>
                     </div>
                 </div>
-
-                <!-- Step 2: Security & Settings -->
                 <div class="form-step" data-step="2">
                     <div class="form-group password-group">
                         <label for="profilePassword">New Password (Optional)</label>
@@ -316,6 +334,8 @@
     </div>
 </div>
 
+<!-- Toast Notification Container -->
+<div id="toastContainer"></div>
 <script src="script.js"></script>
 </body>
 </html>
