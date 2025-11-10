@@ -24,8 +24,11 @@ A lightweight, responsive **Product Management System** built with **HTML, CSS, 
 Software-Engineering-Lab-Activity-7/
 │
 ├── index.html         # Main HTML structure with login, dashboard, billing, and modals
+
 ├── style.css          # Complete responsive styling using modern CSS (Flexbox, Grid)
+
 ├── script.js          # Vanilla JavaScript for interactivity, validation, billing logic, and modals
+
 └── README.md          # Project documentation
 
 ---
