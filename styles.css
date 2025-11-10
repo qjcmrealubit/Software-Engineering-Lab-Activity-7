@@ -101,13 +101,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: .95rem;
     border-bottom: 1px solid #e9ecef; /* Lighter border */
-    position: fixed;
-    top: 0;
-    left: 240px; /* Same as sidebar width */
-    right: 0;
-    z-index: 100;
+    flex-shrink: 0; /* Prevent top-bar from shrinking */
 }
 .top-bar-title {
     font-size: 1.25rem;
@@ -124,27 +119,26 @@ body {
 .top-bar .logout:hover {
     color: #2196f3; /* Updated blue */
 }
-.main-content {
+.main-content-wrapper {
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    flex: 1; /* Allow this wrapper to grow and fill space */
+    height: 100vh;
 }
 .sidebar {
     width: 240px;
     background: #fff;
     border-right: 1px solid #e9ecef; /* Lighter border */
     padding: 20px 0;
-    overflow-y: auto;
     transition: width 0.3s ease;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
 }
 .sidebar-header {
     padding: 0 24px 20px 24px;
     border-bottom: 1px solid #e9ecef; /* Lighter border */
+    flex-shrink: 0;
 }
 .sidebar-header h2 {
     font-size: 1.2rem;
@@ -154,6 +148,7 @@ body {
 .sidebar ul {
     list-style: none;
     padding-top: 10px;
+    overflow-y: auto; /* Allow only the list to scroll */
 }
 .sidebar li {
     padding: 12px 24px;
@@ -186,10 +181,6 @@ body {
     padding: 30px;
     overflow-y: auto;
     background: #f0f2f5; /* Updated content background */
-    margin-top: 60px; /* Height of top-bar */
-    margin-left: 240px; /* Width of sidebar */
-    max-width: 1400px;
-    margin-right: auto;
 }
 .page-title {
     font-size: 1.5rem;
