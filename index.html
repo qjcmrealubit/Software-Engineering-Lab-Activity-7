@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<main>
+    <h1>New User Registration</h1>
+    <form id="registrationForm" action="/api/register" method="POST">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+            <span class="error-message" id="fullName-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="user@example.com" required>
+            <span class="error-message" id="email-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password (Min 8 chars)</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required minlength="8">
+            <span class="error-message" id="password-error"></span>
+        </div>
+        
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required>
+            <span class="error-message" id="confirmPassword-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country" name="country" required>
+                <option value="" disabled selected>Select your country</option>
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+            </select>
+            <span class="error-message" id="country-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="birthDate">Birth Date</label>
+            <input type="date" id="birthDate" name="birthDate" required max="2007-01-01">
+            <span class="error-message" id="birthDate-error"></span>
+        </div>
+        
+        <fieldset class="form-group">
+            <legend>Account Type</legend>
+            <input type="radio" id="personal" name="accountType" value="personal" checked>
+            <label for="personal">Personal</label>
+            <input type="radio" id="business" name="accountType" value="business">
+            <label for="business">Business</label>
+        </fieldset>
+
+        <div class="form-group checkbox-group">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+            <span class="error-message" id="terms-error"></span>
+        </div>
+        
+        <input type="hidden" name="registrationTimestamp" value="[Current Server Timestamp]">
+        
+        <div class="button-group">
+            <button type="submit" class="submit-btn">Create Account</button>
+            <button type="reset" class="reset-btn">Clear Form</button>
+        </div>
+    </form>
+</main>
+
+<script src="validation.js"></script>
+</body>
+</html>
