@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connected Form Application</title>
+    <title>Martiliu Packo Product Management System</title>
     
     <style>
-        /* --- EMBEDDED STYLES.CSS FOR DESIGN CONSISTENCY --- */
-        
-        /* GENERAL STYLES */
+        /* --- EMBEDDED STYLES.CSS (Identical to previous) --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f7f6; /* Light gray background */
+            background-color: #f4f7f6;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,13 +21,12 @@
         main {
             width: 100%;
             max-width: 500px;
-            background: #ffffff; /* White background */
+            background: #ffffff;
             padding: 30px;
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        /* Targets both H1 and H2 for consistency */
         h1, h2 {
             color: #333;
             text-align: center;
@@ -37,7 +34,6 @@
             font-size: 1.8em;
         }
         
-        /* Navigation Links */
         #nav-bar {
             text-align: center;
             margin-bottom: 20px;
@@ -56,38 +52,34 @@
         }
 
 
-        /* FORM GROUPS AND INPUTS */
         .form-group {
             margin-bottom: 25px;
         }
 
         label {
             display: block;
-            font-weight: 600; /* Slightly bolder */
+            font-weight: 600;
             color: #555;
             margin-bottom: 8px;
             font-size: 0.95em;
         }
 
-        /* Style for all text-based inputs and select */
         input:not([type="radio"]):not([type="checkbox"]), select, textarea {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd; /* Light border */
-            border-radius: 6px; /* Rounded input corners */
+            border: 1px solid #ddd;
+            border-radius: 6px;
             box-sizing: border-box; 
             transition: border-color 0.3s, box-shadow 0.3s;
             font-size: 1em;
         }
 
-        /* UX: Focus State (Accessibility) */
         input:focus:not([type="radio"]):not([type="checkbox"]), select:focus, textarea:focus {
             border-color: #007bff;
             box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
             outline: none;
         }
 
-        /* RADIO AND CHECKBOX GROUP */
         fieldset {
             border: 1px solid #eee;
             padding: 15px;
@@ -100,36 +92,32 @@
             padding: 0 10px;
         }
         .checkbox-group label {
-            display: inline; /* Keep label inline with checkbox */
+            display: inline;
             font-weight: normal;
         }
 
-        /* VALIDATION AND ERROR STYLES */
-        /* Error Message Appearance */
         .error-message {
-            color: #dc3545; /* Bootstrap-like red */
+            color: #dc3545;
             font-size: 0.85em;
             margin-top: 5px;
             padding-left: 2px;
             display: block;
         }
 
-        /* Visual feedback for invalid inputs */
         input:invalid:focus:not(:placeholder-shown) {
             border-color: #dc3545;
             box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
         }
 
-        /* BUTTONS */
         .button-group {
             display: flex;
             justify-content: space-between;
-            gap: 10px; /* Space between buttons */
+            gap: 10px;
             margin-top: 30px;
         }
 
         .submit-btn, .reset-btn {
-            flex-grow: 1; /* Make buttons share space equally */
+            flex-grow: 1;
             padding: 12px;
             border: none;
             border-radius: 6px;
@@ -140,7 +128,7 @@
         }
 
         .submit-btn {
-            background-color: #007bff; /* Primary action blue */
+            background-color: #007bff;
             color: white;
         }
         .submit-btn:hover {
@@ -148,7 +136,7 @@
         }
 
         .reset-btn {
-            background-color: #6c757d; /* Secondary gray */
+            background-color: #6c757d;
             color: white;
         }
         .reset-btn:hover {
@@ -160,15 +148,15 @@
 
 <main>
     <div id="nav-bar">
-        <span class="nav-link" onclick="showView('registrationView')">Register</span> |
-        <span class="nav-link" onclick="showView('loginView')">Login</span> |
-        <span class="nav-link" onclick="showView('checkoutView')">Checkout</span> |
-        <span class="nav-link" onclick="showView('profileView')">Profile</span>
+        <span class="nav-link" onclick="showView('registrationView')">User Registration</span> |
+        <span class="nav-link" onclick="showView('loginView')">Security Login</span> |
+        <span class="nav-link" onclick="showView('checkoutView')">Billing/Checkout</span> |
+        <span class="nav-link" onclick="showView('profileView')">Profile Update</span>
     </div>
 
-    <!-- 1. MAJOR FORM: USER REGISTRATION -->
+    <!-- 1. MAJOR FORM: USER REGISTRATION (Security/Account Management) -->
     <div id="registrationView">
-        <h1>Create Your Account</h1>
+        <h1>Martiliu Packo System Registration</h1>
         <form id="registrationForm" action="/api/register" method="POST">
             <!-- 1. Textbox (Full Name) -->
             <div class="form-group">
@@ -216,39 +204,39 @@
                 <span class="error-message" id="secQuestion-error"></span>
             </div>
 
-            <!-- 7. Radio Buttons (Role) -->
+            <!-- 7. Radio Buttons (Role - Aligns with LOA Figure 42) -->
             <fieldset class="form-group">
-                <legend>Account Role</legend>
+                <legend>Account Role (LOA)</legend>
                 <input type="radio" id="customer" name="role" value="customer" checked>
-                <label for="customer">Customer</label>
+                <label for="customer">Customer/Staff</label>
                 <input type="radio" id="vendor" name="role" value="vendor">
-                <label for="vendor">Vendor</label>
+                <label for="vendor">Admin</label>
             </fieldset>
 
             <!-- 8. Checkbox (Newsletter) -->
             <div class="form-group checkbox-group">
                 <input type="checkbox" id="newsletter" name="newsletter">
-                <label for="newsletter">Subscribe to our newsletter</label>
+                <label for="newsletter">Subscribe to updates</label>
             </div>
             
             <!-- 9. Hidden Field -->
             <input type="hidden" name="source" value="web_signup">
             
             <div class="button-group">
-                <button type="submit" class="submit-btn">Register</button>
+                <button type="submit" class="submit-btn">Register Account</button>
                 <button type="reset" class="reset-btn">Clear Form</button>
             </div>
         </form>
     </div>
 
-    <!-- 2. SUPPORTING FORM: LOGIN PAGE -->
+    <!-- 2. SUPPORTING FORM: LOGIN PAGE (Security/User Login) -->
     <div id="loginView" style="display:none;">
-        <h2>Sign In to Your Account</h2>
+        <h2>Martiliu Packo System Login</h2>
         <form id="loginForm" action="/api/login" method="POST">
             <!-- 1. Email -->
             <div class="form-group">
-                <label for="loginEmail">Email Address</label>
-                <input type="email" id="loginEmail" name="loginEmail" placeholder="user@example.com" required>
+                <label for="loginEmail">Email Address (Username)</label>
+                <input type="email" id="loginEmail" name="loginEmail" placeholder="user@martiliu.com" required>
                 <span class="error-message" id="loginEmail-error"></span>
             </div>
 
@@ -267,28 +255,28 @@
 
             <!-- 4. Submit Button -->
             <div class="button-group">
-                <button type="submit" class="submit-btn">Log In</button>
+                <button type="submit" class="submit-btn">Validate Credentials</button>
             </div>
         </form>
     </div>
 
-    <!-- 3. MAJOR FORM: PRODUCT CHECKOUT -->
+    <!-- 3. MAJOR FORM: PRODUCT CHECKOUT (Billing and Payment Module) -->
     <div id="checkoutView" style="display:none;">
-        <h2>Complete Your Order</h2>
+        <h2>Martiliu Packo Billing & Payment</h2>
         <form id="checkoutForm" action="/api/checkout" method="POST">
             
             <!-- Section 1: Shipping (Controls 1, 2, 3, 4) -->
             <fieldset>
-                <legend>Shipping & Address</legend>
+                <legend>Transaction Details</legend>
                 <!-- 1. Textbox (Shipping Name) -->
                 <div class="form-group">
-                    <label for="shipName">Recipient Full Name</label>
+                    <label for="shipName">Customer Full Name</label>
                     <input type="text" id="shipName" name="shipName" required>
                     <span class="error-message" id="shipName-error"></span>
                 </div>
                 <!-- 2. Textarea (Shipping Address) -->
                 <div class="form-group">
-                    <label for="shipAddress">Street Address</label>
+                    <label for="shipAddress">Delivery Address</label>
                     <textarea id="shipAddress" name="shipAddress" rows="3" placeholder="Apartment, building, street" required></textarea>
                     <span class="error-message" id="shipAddress-error"></span>
                 </div>
@@ -349,14 +337,14 @@
             
             <!-- Button -->
             <div class="button-group">
-                <button type="submit" class="submit-btn">Place Order</button>
+                <button type="submit" class="submit-btn">Process Payment</button>
             </div>
         </form>
     </div>
 
-    <!-- 4. SUPPORTING FORM: PROFILE UPDATE -->
+    <!-- 4. SUPPORTING FORM: PROFILE UPDATE (Account Management Module) -->
     <div id="profileView" style="display:none;">
-        <h2>Update Profile Settings</h2>
+        <h2>Martiliu Packo Profile Update</h2>
         <form id="profileForm" action="/api/update-profile" method="POST">
             <!-- 1. Textbox (Full Name) -->
             <div class="form-group">
@@ -451,7 +439,7 @@
         // Helper function to handle form submission simulation
         const handleSuccess = (form, message, nextViewId) => {
              form.innerHTML = `<h2>Success!</h2><p>${message}</p>
-                <div class="button-group"><button onclick="showView('${nextViewId}')" class="submit-btn">Continue</button></div>`;
+                 <div class="button-group"><button onclick="location.reload()" class="reset-btn">Start Over</button> <button onclick="showView('${nextViewId}')" class="submit-btn">Continue</button></div>`;
         };
 
 
@@ -514,6 +502,7 @@
                 }
 
                 if (isValid) {
+                    // Logic flow: Login -> Profile Update
                     handleSuccess(loginForm, 'Access Granted. Proceed to profile update or checkout.', 'profileView');
                 }
             });
@@ -557,6 +546,7 @@
                     isValid = false;
                 }
                 
+                // General required check for other fields
                 this.querySelectorAll('[required]:not([type="radio"])').forEach(input => {
                     if (input.value.trim() === '') {
                         const errorId = input.id + '-error';
@@ -568,6 +558,7 @@
                 });
 
                 if (isValid) {
+                    // Logic flow: Checkout -> Profile (or reset)
                     handleSuccess(checkoutForm, 'Order Confirmed! Thank you for your purchase.', 'profileView');
                 }
             });
@@ -607,6 +598,7 @@
                 }
                 
                 if (isValid) {
+                    // Logic flow: Profile -> Checkout (to complete the loop)
                     handleSuccess(profileForm, 'Profile changes have been saved.', 'checkoutView');
                 }
             });
